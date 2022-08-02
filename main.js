@@ -118,15 +118,19 @@ document.querySelector('#btn5').onclick = function () {
     //input
     var soChan = 0;
     var chan = listNumber[0];
+    var result = "";
     //process
     for (var i = 0; i < listNumber.length; i++) {
         if(listNumber[i] % 2 === 0) {
             chan = listNumber[i];
             soChan = i;
+            result = listNumber[soChan];
+        }else {
+            result = 0;
         }
     }
     //output
-    document.querySelector('#showInfor5').innerHTML = 'Số chẵn cuối cùng: ' + listNumber[soChan];
+    document.querySelector('#showInfor5').innerHTML = 'Số chẵn cuối cùng: ' + result;
 }
 
 /**
@@ -205,7 +209,9 @@ document.getElementById('btn8').onclick = function () {
 
 function isprime(n){
     let test = 1;
-    if (n <2) return test = 0;
+    if (n <2) 
+    return test = 0;
+
     let i = 2;
     while(i <n){
         if(n % i == 0) {
@@ -228,13 +234,57 @@ document.querySelector('#btn9').onclick = function () {
     }
     //input
     var countSoNguyen = 0;
-    var show = listNumber[i];
     //process
     for(var i = 0; i < listNumber.length; i++) {
-        if(show % 2 == 0) {
-            countSoNguyen += 1; 
+        var list = listNumber[i];
+        if(soNguyen(list) == 1) {
+            countSoNguyen += 1;
         }
     }
     //output
     document.querySelector('#showInfor9').innerHTML = 'Số nguyên: ' + countSoNguyen;
 }
+
+function soNguyen(a) {
+    var test = 1;
+    switch (Number.isInteger(a)) {
+    case false:
+        test = 0;
+        break;  
+    } 
+    return test;
+}
+
+/**
+ * 10. So sánh số lượng âm và dương
+ */
+
+ document.querySelector('#btn10').onclick = function () {
+    if(listNumber.length === 0) {
+        alert("Vui lòng thêm số!");
+        return;
+    }
+    //input
+    var countSoDuong = 0;
+    var countSoAm = 0;
+    //process
+    for(i = 0; i < listNumber.length; i++) {
+        var show = listNumber[i];
+        if(show > 0) {
+            countSoDuong += 1; 
+        }else {
+            countSoAm += 1;
+        }
+    }
+    var result = "";
+    if (countSoAm > countSoDuong) {
+        result = "Số Âm > Số Dương";
+    }else if (countSoAm < countSoDuong) {
+        result = "Số Dương > Số Âm";
+    }else {
+        result = "Số Dương = Số Âm";
+    }
+    //output
+    document.getElementById('showInfor10').innerHTML = result;
+
+ }
